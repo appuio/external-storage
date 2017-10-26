@@ -2,7 +2,6 @@ FROM centos:7
 
 MAINTAINER APPUiO Maintainer
 
-ENV CGO_ENABLED=0
 ADD gluster/block/gluster-block.repo /etc/yum.repos.d
 ADD gluster/block /go/src/github.com/kubernetes-incubator/external-storage/gluster/block
 ADD vendor /go/src/github.com/kubernetes-incubator/external-storage/vendor
@@ -13,6 +12,7 @@ RUN yum update -y && \
     export GOPATH=/go && \
     yum -y install golang-bin && \
     go install github.com/kubernetes-incubator/external-storage/gluster/block/cmd/glusterblock-provisioner && \
+    rm -rf /go/src /go/pkg && \
     yum -y history undo last && \
     yum clean all
 
