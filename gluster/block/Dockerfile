@@ -16,6 +16,4 @@ RUN yum update -y && \
     yum -y history undo last && \
     yum clean all
 
-USER 1001
-
 ENTRYPOINT ["/go/bin/glusterblock-provisioner"]
